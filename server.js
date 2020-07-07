@@ -3,7 +3,6 @@
 
 var express = require("express");
 var path = require("path");
-const { json } = require("express");
 
 // Express Startup
 var app = express();
