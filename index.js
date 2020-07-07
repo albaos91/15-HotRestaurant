@@ -19,7 +19,7 @@ var activeTables = [];
 var waitlist = [];
 
 //Routes displaying HTML pages
-app.get("/home", function (req, res) {
+app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "home.html"));
 });
 
