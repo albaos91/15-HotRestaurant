@@ -15,8 +15,8 @@ app.use(express.json());
 
 //Table & reservation variables
 
-const tables = { table1, table2, table3, table4, table5 };
-const reservation = { res1, res2, res3, res4 };
+var activeTables = [];
+var waitlist = [];
 
 //Routes displaying HTML pages
 app.get("/home", function (req, res) {
@@ -42,13 +42,18 @@ app.post("/api/reservations", function(req, res){
     var newReservation = req.body;
 
     newReservation.routeName = newReservation.name.replace(/\s+/g, "").toLowerCase();
-
     console.log(newReservation);
 
-    // Array name reservation
-    reservation.push(newReservation);
-
+    if(activeTables.length === 5){
+        waitlist.push(newReservation);
+        var isOnWaitlist = true;
+    } else {
+        activeTables.push(newReservation);
+        var isOnWaitlist = false;
+    }
+    
     res.json(newReservation);
+    res.send(200,{"isOnWaitlist": isOnWaitlist});
 });
 
 
