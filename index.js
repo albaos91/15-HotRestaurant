@@ -31,6 +31,22 @@ app.get("/api/tables", function (req, res) {
   return res.json(tables);
 });
 
+
+// New Reservation Handling
+app.post("/api/reservations", function(req, res){
+    var newReservation = req.body;
+
+    newReservation.routeName = newReservation.name.replace(/\s+/g, "").toLowerCase();
+
+    console.log(newReservation);
+
+    // Array name reservation
+    reservation.push(newReservation);
+
+    res.json(newReservation);
+});
+
+
 // Start server and begin listening
 app.listen(PORT, function () {
   console.log(`Server listening on port:${PORT}`);
